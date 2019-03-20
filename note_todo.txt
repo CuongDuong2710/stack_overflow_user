@@ -1,0 +1,6 @@
+1. Use androidX library -> error mergeWithDebug
+
+_ In gradle.properties:
+
+android.useAndroidX=true
+android.enableJetifier=true
