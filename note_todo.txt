@@ -4,3 +4,5 @@ _ In gradle.properties:
 
 android.useAndroidX=true
 android.enableJetifier=true
+
+https://api.stackexchange.com/2.2/me?order=desc&sort=reputation&site=stackoverflow
