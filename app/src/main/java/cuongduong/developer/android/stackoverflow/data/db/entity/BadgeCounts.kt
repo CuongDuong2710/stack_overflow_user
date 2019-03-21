@@ -1,4 +1,4 @@
-package cuongduong.developer.android.stackoverflow.data.response
+package cuongduong.developer.android.stackoverflow.data.db.entity
 
 data class BadgeCounts(
     val bronze: Int,

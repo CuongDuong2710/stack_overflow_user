@@ -1,8 +1,13 @@
-package cuongduong.developer.android.stackoverflow.data.response
+package cuongduong.developer.android.stackoverflow.data.db.entity
 
+import androidx.room.Embedded
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
+@Entity(tableName = "item")
 data class Item(
+    @Embedded(prefix = "badge_counts_")
     @SerializedName("badge_counts")
     val badgeCounts: BadgeCounts,
     @SerializedName("account_id")
@@ -40,4 +45,7 @@ data class Item(
     val profileImage: String,
     @SerializedName("display_name")
     val displayName: String
-)
+) {
+    @PrimaryKey(autoGenerate = true)
+    var id: Int? = null
+}

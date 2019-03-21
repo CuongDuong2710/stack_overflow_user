@@ -1,6 +1,7 @@
-package cuongduong.developer.android.stackoverflow.data.response
+package cuongduong.developer.android.stackoverflow.data.network.response
 
 import com.google.gson.annotations.SerializedName
+import cuongduong.developer.android.stackoverflow.data.db.entity.Item
 
 data class UserListResponse(
     val items: List<Item>,
