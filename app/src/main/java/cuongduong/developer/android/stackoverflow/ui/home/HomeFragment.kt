@@ -36,8 +36,8 @@ class HomeFragment : Fragment() {
         val apiService = StackExchangeApiServices()
 
         GlobalScope.launch(Dispatchers.Main) {
-            val userListResponse = apiService.getUser("6952420").await()
-            textView.text = userListResponse.items[0].displayName
+            val userList = apiService.getUserList(1, 30).await()
+            textView.text = userList.items[0].displayName
         }
 
     }
