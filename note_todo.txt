@@ -5,4 +5,5 @@ _ In gradle.properties:
 android.useAndroidX=true
 android.enableJetifier=true
 
-https://api.stackexchange.com/2.2/me?order=desc&sort=reputation&site=stackoverflow
+https://api.stackexchange.com/2.2/users/{ids}?order=desc&sort=reputation&site=stackoverflow
+https://api.stackexchange.com/2.2/users/6952420?order=desc&sort=reputation&site=stackoverflow

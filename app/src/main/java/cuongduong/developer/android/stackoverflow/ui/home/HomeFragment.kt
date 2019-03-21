@@ -8,6 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 
 import cuongduong.developer.android.stackoverflow.R
+import cuongduong.developer.android.stackoverflow.data.StackExchangeApiServices
+import kotlinx.android.synthetic.main.home_fragment.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
 
@@ -28,6 +33,13 @@ class HomeFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
         // TODO: Use the ViewModel
+        val apiService = StackExchangeApiServices()
+
+        GlobalScope.launch(Dispatchers.Main) {
+            val userListResponse = apiService.getUser("6952420").await()
+            textView.text = userListResponse.items[0].displayName
+        }
+
     }
 
 }
