@@ -7,3 +7,31 @@ android.enableJetifier=true
 
 https://api.stackexchange.com/2.2/users/{ids}?order=desc&sort=reputation&site=stackoverflow
 https://api.stackexchange.com/2.2/users/6952420?order=desc&sort=reputation&site=stackoverflow
+
+/2.2/access-tokens/{accessTokens}
+/2.2/access-tokens/GLEfdgzDXNyMeUq(V9AsFg))
+
+https://api.stackexchange.com/2.2/access-tokens/GLEfdgzDXNyMeUq(V9AsFg))/me?order=desc&sort=reputation&site=stackoverflow
+
+
+2. View doesn't know about ViewModel. ViewModel expose data to view.
+3. Lazy
+_ Suspend function 'getUserList' should be called only from a coroutine or another suspend function
+_ CurrentWeatherViewModel is instantiated as an object, 'weather' would not be initialized instantly as CurrentWeatherViewModel.
+It would wait for it to be caught, set to lazy property to get value LiveDate from getCurrentWeather.
+	val weather by lazy {
+        stackExchangeRepository.getUserList()
+    }
+_ Called from coroutine context, lazy block doesn't provide any coroutine context.
+_ Create little like lazy -> lazyDeferred
+
+_ Create ViewModelFActory because ViewModel are preserving state (change device rotation, data store in ViewModel will be not destroyed)
+We cannot always create a new instance of CurrentWeatherViewModel or any ViewModel(only create new instance during the first launch of the view/fragment)
+_ Factory will handle the saving of our current instance of our ViewModel.
+_ Actually, preservation of ViewModel is a job for a ViewModelProvider.
+We only pass the factory into the Provider. FActories work as usual, creating new instances of objects.
+
+_ GlobalScope.launch is not safe to use from something has a life cycle (fragment). Launch finish is only after fragment is destroyed -> crash app.
+
+Throws:  IndexOutOfBoundsException - if the index is out of range (index < 0 || index >= size())
+

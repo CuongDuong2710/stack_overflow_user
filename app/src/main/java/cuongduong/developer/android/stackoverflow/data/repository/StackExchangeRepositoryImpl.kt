@@ -1,5 +1,6 @@
 package cuongduong.developer.android.stackoverflow.data.repository
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import cuongduong.developer.android.stackoverflow.data.db.dao.ItemListDao
 import cuongduong.developer.android.stackoverflow.data.db.entity.Item
@@ -15,7 +16,7 @@ class StackExchangeRepositoryImpl(
     private val stackExchangeNetworkDataSource: StackExchangeNetworkDataSource
 ) : StackExchangeRepository {
 
-    // observer for data changes in API and save in local database
+    // always observer for data changes in API and save in local database
     init {
         stackExchangeNetworkDataSource.apply {
             downloadUserList.observeForever {
@@ -36,7 +37,12 @@ class StackExchangeRepositoryImpl(
     // get user list from local database
     override suspend fun getUserList(): LiveData<List<Item>> {
         return withContext(Dispatchers.IO) {
+            initUserListData()
             return@withContext itemListDao.getUserList()
         }
+    }
+
+    private suspend fun initUserListData() {
+        stackExchangeNetworkDataSource.fetchUserList(1, 30)
     }
 }

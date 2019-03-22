@@ -2,22 +2,23 @@ package cuongduong.developer.android.stackoverflow.ui.home
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 
 import cuongduong.developer.android.stackoverflow.R
-import cuongduong.developer.android.stackoverflow.data.StackExchangeApiServices
-import cuongduong.developer.android.stackoverflow.data.network.ConnectivityInterceptorImp
-import cuongduong.developer.android.stackoverflow.data.network.StackExchangeNetworkDataSourceImpl
+import cuongduong.developer.android.stackoverflow.ui.base.ScopedFragment
 import kotlinx.android.synthetic.main.home_fragment.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.x.closestKodein
+import org.kodein.di.generic.instance
 
-class HomeFragment : Fragment() {
+class HomeFragment : ScopedFragment(), KodeinAware {
+    override val kodein by closestKodein() // closestKodein will get whatever in StackExchangeApplication
+
+    private val viewModelFactory: HomeViewModelFactory by instance()
 
     companion object {
         fun newInstance() = HomeFragment()
@@ -34,19 +35,20 @@ class HomeFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(HomeViewModel::class.java)
 
-        val apiService = StackExchangeApiServices(ConnectivityInterceptorImp(this.context!!))
-        val stackExchangeNetworkDataSource = StackExchangeNetworkDataSourceImpl(apiService)
+        bindUI()
+    }
 
-        stackExchangeNetworkDataSource.downloadUserList.observe(this, Observer {
-            textView.text = it.items[0].displayName
+    private fun bindUI() = launch {
+        val userList = viewModel.userList.await()
+        // observer it from database, called every time there is some change in data
+        userList.observe(this@HomeFragment, Observer {
+            // if null, return Observer to observer database once again. When database has data, show displayName
+            if (it == null) return@Observer
+
+            textView.text = it[0].displayName // first call, database is null -> app crash -> check it == null
         })
-
-        GlobalScope.launch(Dispatchers.Main) {
-            stackExchangeNetworkDataSource.fetchUserList(1, 30)
-        }
-
     }
 
 }
