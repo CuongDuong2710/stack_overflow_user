@@ -1,5 +1,6 @@
 package cuongduong.developer.android.stackoverflow.data.db.entity
 
+import androidx.annotation.Nullable
 import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -37,7 +38,8 @@ data class Item(
     val userId: Int,
     @SerializedName("accept_rate")
     val acceptRate: Int,
-    val location: String,
+    @Nullable
+    val location: String? = null,
     @SerializedName("website_url")
     val websiteUrl: String,
     val link: String,
