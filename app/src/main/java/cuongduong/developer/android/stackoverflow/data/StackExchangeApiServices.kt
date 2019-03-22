@@ -1,6 +1,7 @@
 package cuongduong.developer.android.stackoverflow.data
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
+import cuongduong.developer.android.stackoverflow.data.network.ConnectivityInterceptor
 import cuongduong.developer.android.stackoverflow.data.network.response.UserListResponse
 import kotlinx.coroutines.Deferred
 import okhttp3.Interceptor
@@ -29,7 +30,9 @@ interface StackExchangeApiServices {
     ): Deferred<UserListResponse>
 
     companion object {
-        operator fun invoke(): StackExchangeApiServices {
+        operator fun invoke(
+            connectivityInterceptor: ConnectivityInterceptor
+        ): StackExchangeApiServices {
             val requestInterceptor = Interceptor { chain ->
 
                 val url = chain.request()
@@ -45,6 +48,7 @@ interface StackExchangeApiServices {
             }
             val okHttpClient = OkHttpClient.Builder()
                 .addInterceptor(requestInterceptor)
+                .addInterceptor(connectivityInterceptor)
                 .build()
 
             return Retrofit.Builder()

@@ -6,9 +6,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 
 import cuongduong.developer.android.stackoverflow.R
 import cuongduong.developer.android.stackoverflow.data.StackExchangeApiServices
+import cuongduong.developer.android.stackoverflow.data.network.ConnectivityInterceptorImp
+import cuongduong.developer.android.stackoverflow.data.network.StackExchangeNetworkDataSourceImpl
 import kotlinx.android.synthetic.main.home_fragment.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -32,12 +35,16 @@ class HomeFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
-        // TODO: Use the ViewModel
-        val apiService = StackExchangeApiServices()
+
+        val apiService = StackExchangeApiServices(ConnectivityInterceptorImp(this.context!!))
+        val stackExchangeNetworkDataSource = StackExchangeNetworkDataSourceImpl(apiService)
+
+        stackExchangeNetworkDataSource.downloadUserList.observe(this, Observer {
+            textView.text = it.items[0].displayName
+        })
 
         GlobalScope.launch(Dispatchers.Main) {
-            val userList = apiService.getUserList(1, 30).await()
-            textView.text = userList.items[0].displayName
+            stackExchangeNetworkDataSource.fetchUserList(1, 30)
         }
 
     }
