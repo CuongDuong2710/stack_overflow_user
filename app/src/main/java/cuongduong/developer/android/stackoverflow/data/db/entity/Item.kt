@@ -35,6 +35,7 @@ data class Item(
     @SerializedName("user_type")
     val userType: String,
     @SerializedName("user_id")
+    @PrimaryKey
     val userId: Int,
     @SerializedName("accept_rate")
     val acceptRate: Int,
@@ -47,7 +48,4 @@ data class Item(
     val profileImage: String,
     @SerializedName("display_name")
     val displayName: String
-) {
-    @PrimaryKey(autoGenerate = true)
-    var id: Int? = null
-}
+)
