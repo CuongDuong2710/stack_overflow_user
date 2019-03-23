@@ -9,7 +9,7 @@ import cuongduong.developer.android.stackoverflow.data.network.StackExchangeNetw
 import cuongduong.developer.android.stackoverflow.data.network.StackExchangeNetworkDataSourceImpl
 import cuongduong.developer.android.stackoverflow.data.repository.StackExchangeRepository
 import cuongduong.developer.android.stackoverflow.data.repository.StackExchangeRepositoryImpl
-import cuongduong.developer.android.stackoverflow.ui.home.HomeViewModelFactory
+import cuongduong.developer.android.stackoverflow.ui.home.UserListViewModelFactory
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.androidXModule
@@ -29,7 +29,7 @@ class StackExchangeApplication : Application(), KodeinAware {
         bind() from singleton { StackExchangeApiServices(instance()) } // instance in this case is above instance of ConnectivityInterceptor
         bind<StackExchangeNetworkDataSource>() with singleton { StackExchangeNetworkDataSourceImpl(instance()) } // instance in this case is StackExchangeApiServices
         bind<StackExchangeRepository>() with singleton { StackExchangeRepositoryImpl(instance(), instance()) } // itemListDao and StackExchangeNetworkDataSource
-        bind() from provider { HomeViewModelFactory(instance()) } // don't need singleton, this bind() call always return a new instance of our factory
+        bind() from provider { UserListViewModelFactory(instance()) } // don't need singleton, this bind() call always return a new instance of our factory
         // instance in this case is StackExchangeRepository
     }
 

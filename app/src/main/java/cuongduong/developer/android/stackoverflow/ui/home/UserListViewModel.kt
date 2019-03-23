@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel;
 import cuongduong.developer.android.stackoverflow.data.repository.StackExchangeRepository
 import cuongduong.developer.android.stackoverflow.internal.lazyDeferred
 
-class HomeViewModel(
+class UserListViewModel(
     private val stackExchangeRepository: StackExchangeRepository
 ) : ViewModel() {
     val userList by lazyDeferred {
