@@ -6,8 +6,8 @@
 
     <fragment android:id="@+id/homeFragment"
               android:name="cuongduong.developer.android.stackoverflow.ui.home.UserListFragment"
-              android:label="home_fragment" tools:layout="@layout/user_list_fragment"/>
+              android:label="@string/stack_over_flow_title" tools:layout="@layout/user_list_fragment"/>
     <fragment android:id="@+id/bookmarkFragment"
               android:name="cuongduong.developer.android.stackoverflow.ui.bookmark.BookmarkFragment"
-              android:label="bookmark_fragment" tools:layout="@layout/bookmark_fragment"/>
+              android:label="@string/bookmark_title" tools:layout="@layout/bookmark_fragment"/>
 </navigation>

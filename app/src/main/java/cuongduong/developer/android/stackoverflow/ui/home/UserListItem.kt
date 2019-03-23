@@ -13,8 +13,10 @@ class UserListItem(
     override fun bind(viewHolder: ViewHolder, position: Int) {
         viewHolder.apply {
             textView_username.text = itemEntity.displayName
+            textView_reputation.text = "Reputation:"
             textView_reputation_value.text = itemEntity.reputation.toString()
             textView_location.text = itemEntity.location
+            textView_last_access_date.text = "Access date:"
             textView_date_value.text = itemEntity.lastAccessDate.toString()
             updateAvatar()
         }

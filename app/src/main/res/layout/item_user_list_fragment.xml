@@ -16,24 +16,24 @@
         <ImageView
                 android:id="@+id/imageView_avatar"
                 android:layout_width="100dp"
-                android:layout_height="0dp"
-                android:layout_marginStart="40dp"
+                android:layout_height="117dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="28dp"
                 android:layout_marginBottom="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.328"
+                app:layout_constraintVertical_bias="0.0"
                 app:layout_constraintWidth_percent="0.15"
                 tools:src="@drawable/ic_bookmark"
-                tools:tint="#f9a920" />
+                tools:tint="#f9a920"/>
 
         <TextView
                 android:id="@+id/textView_username"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="50dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="28dp"
                 android:layout_marginEnd="8dp"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
@@ -41,24 +41,24 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@+id/imageView_avatar"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="Cuong Quoc" />
+                tools:text="Cuong Quoc"/>
 
         <TextView
                 android:id="@+id/textView_reputation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="50dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="20dp"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                 app:layout_constraintStart_toEndOf="@+id/imageView_avatar"
                 app:layout_constraintTop_toBottomOf="@+id/textView_username"
-                tools:text="Reputation" />
+                tools:text="Reputation:"/>
 
         <TextView
                 android:id="@+id/textView_location"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="50dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="100dp"
                 android:ellipsize="end"
@@ -68,13 +68,12 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@+id/imageView_avatar"
                 app:layout_constraintTop_toBottomOf="@+id/textView_reputation"
-                tools:text="Location" />
+                tools:text="Location"/>
 
         <TextView
                 android:id="@+id/textView_last_access_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="50dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="120dp"
                 android:layout_marginBottom="8dp"
@@ -83,30 +82,32 @@
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/imageView_avatar"
                 app:layout_constraintTop_toBottomOf="@+id/textView_location"
                 app:layout_constraintVertical_bias="0.703"
-                tools:text="Access Date:" />
+                tools:text="Access Date:" app:layout_constraintHorizontal_bias="0.0" android:layout_marginStart="8dp"
+                app:layout_constraintStart_toStartOf="@+id/imageView_avatar"/>
 
         <TextView
                 android:id="@+id/textView_reputation_value"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="72dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="71dp"
                 android:layout_marginEnd="8dp"
                 android:text="TextView"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.101"
+                app:layout_constraintHorizontal_bias="0.065"
                 app:layout_constraintStart_toEndOf="@+id/textView_reputation"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent" android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="@+id/textView_reputation"
+                app:layout_constraintVertical_bias="0.0"/>
 
         <TextView
                 android:id="@+id/textView_date_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="16dp"
                 android:text="TextView"
@@ -114,7 +115,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/textView_last_access_date" />
+                app:layout_constraintStart_toEndOf="@+id/textView_last_access_date"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
