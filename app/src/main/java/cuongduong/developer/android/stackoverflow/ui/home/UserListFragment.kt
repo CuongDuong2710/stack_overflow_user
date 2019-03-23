@@ -1,0 +1,82 @@
+package cuongduong.developer.android.stackoverflow.ui.home
+
+import androidx.lifecycle.ViewModelProviders
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.Toast
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.xwray.groupie.GroupAdapter
+import com.xwray.groupie.kotlinandroidextensions.ViewHolder
+
+import cuongduong.developer.android.stackoverflow.R
+import cuongduong.developer.android.stackoverflow.data.db.entity.Item
+import cuongduong.developer.android.stackoverflow.ui.base.ScopedFragment
+import kotlinx.android.synthetic.main.user_list_fragment.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.x.closestKodein
+import org.kodein.di.generic.instance
+
+class UserListFragment : ScopedFragment(), KodeinAware {
+    override val kodein by closestKodein() // closestKodein will get whatever in StackExchangeApplication
+
+    private val viewModelFactory: UserListViewModelFactory by instance()
+
+    companion object {
+        fun newInstance() = UserListFragment()
+    }
+
+    private lateinit var viewModel: UserListViewModel
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(R.layout.user_list_fragment, container, false)
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(UserListViewModel::class.java)
+
+        bindUI()
+    }
+
+    private fun bindUI() = launch(Dispatchers.Main) {
+        val userList = viewModel.userList.await()
+        // observer it from database, called every time there is some change in data
+        userList.observe(this@UserListFragment, Observer { userEntries ->
+            // if null, return Observer to observer database once again. When database has data, show displayName
+            if (userEntries == null) return@Observer
+
+            group_loading.visibility = View.GONE
+            initRecycleView(userEntries.toUserListItem())
+        })
+    }
+
+    private fun List<Item>.toUserListItem(): List<UserListItem> {
+        return this.map {
+            UserListItem(it)
+        }
+    }
+
+    private fun initRecycleView(items: List<UserListItem>) {
+        val groupAdapter= GroupAdapter<ViewHolder>().apply {
+            addAll(items)
+        }
+
+        recyclerView.apply {
+            layoutManager = LinearLayoutManager(this@UserListFragment.context)
+            adapter = groupAdapter
+        }
+
+        groupAdapter.setOnItemClickListener { item, view ->
+            Toast.makeText(this@UserListFragment.context, "Clicked", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+}
