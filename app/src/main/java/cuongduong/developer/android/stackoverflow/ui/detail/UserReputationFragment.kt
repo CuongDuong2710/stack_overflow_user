@@ -8,12 +8,15 @@ import android.view.View
 import android.view.ViewGroup
 
 import cuongduong.developer.android.stackoverflow.R
+import cuongduong.developer.android.stackoverflow.ui.base.ScopedFragment
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.x.closestKodein
+import org.kodein.di.generic.instance
 
-class UserReputationFragment : Fragment() {
+class UserReputationFragment : ScopedFragment(), KodeinAware {
+    override val kodein by closestKodein()
 
-    companion object {
-        fun newInstance() = UserReputationFragment()
-    }
+    private val viewModelFactory: UserReputationViewModelFactory by instance()
 
     private lateinit var viewModel: UserReputationViewModel
 
@@ -26,7 +29,7 @@ class UserReputationFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(UserReputationViewModel::class.java)
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(UserReputationViewModel::class.java)
 
         val safeArgs = arguments?.let { UserReputationFragmentArgs.fromBundle(it) }
         val userId = safeArgs?.userId

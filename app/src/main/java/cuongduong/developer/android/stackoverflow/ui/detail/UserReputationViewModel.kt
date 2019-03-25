@@ -1,7 +1,13 @@
 package cuongduong.developer.android.stackoverflow.ui.detail
 
 import androidx.lifecycle.ViewModel;
+import cuongduong.developer.android.stackoverflow.data.repository.StackExchangeRepository
+import cuongduong.developer.android.stackoverflow.internal.lazyDeferred
 
-class UserReputationViewModel : ViewModel() {
-    // TODO: Implement the ViewModel
+class UserReputationViewModel(
+    private val stackExchangeRepository: StackExchangeRepository
+) : ViewModel() {
+    val userReputationList by lazyDeferred {
+        stackExchangeRepository.getUserReputationList()
+    }
 }
