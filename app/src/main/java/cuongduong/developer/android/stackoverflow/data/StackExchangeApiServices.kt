@@ -2,6 +2,7 @@ package cuongduong.developer.android.stackoverflow.data
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import cuongduong.developer.android.stackoverflow.data.network.ConnectivityInterceptor
+import cuongduong.developer.android.stackoverflow.data.network.response.UserReputationResponse
 import cuongduong.developer.android.stackoverflow.data.network.response.UserListResponse
 import kotlinx.coroutines.Deferred
 import okhttp3.Interceptor
@@ -28,6 +29,13 @@ interface StackExchangeApiServices {
         @Query("page") page: Int,
         @Query("pagesize") pageSize: Int
     ): Deferred<UserListResponse>
+
+    // https://api.stackexchange.com/2.2/users/{userid}/reputation-history?page=1&pagesize=30&site=stackoverflow
+    @GET("users/{userid}/reputation-history?site=stackoverflow")
+    fun getUserReputation(
+        @Query("page") page: Int,
+        @Query("pagesize") pageSize: Int
+    ): Deferred<UserReputationResponse>
 
     companion object {
         operator fun invoke(
