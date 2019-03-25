@@ -8,14 +8,14 @@
               android:name="cuongduong.developer.android.stackoverflow.ui.home.UserListFragment"
               android:label="@string/stack_over_flow_title" tools:layout="@layout/user_list_fragment">
         <action android:id="@+id/actionDetail"
-                app:destination="@id/userDetailReputationFragment"/>
+                app:destination="@id/userReputationFragment"/>
     </fragment>
     <fragment android:id="@+id/bookmarkFragment"
               android:name="cuongduong.developer.android.stackoverflow.ui.bookmark.BookmarkFragment"
               android:label="@string/bookmark_title" tools:layout="@layout/bookmark_fragment"/>
-    <fragment android:id="@+id/userDetailReputationFragment"
-              android:name="cuongduong.developer.android.stackoverflow.ui.detail.UserDetailReputationFragment"
-              android:label="user_detail_reputation" tools:layout="@layout/user_detail_reputation_fragment">
+    <fragment android:id="@+id/userReputationFragment"
+              android:name="cuongduong.developer.android.stackoverflow.ui.detail.UserReputationFragment"
+              android:label="@string/user_detail_reputation" tools:layout="@layout/user_detail_reputation_fragment">
         <argument
             android:name="userId"
             app:argType="integer"

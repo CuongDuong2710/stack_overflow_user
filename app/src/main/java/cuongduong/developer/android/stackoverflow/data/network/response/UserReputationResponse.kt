@@ -3,7 +3,7 @@ package cuongduong.developer.android.stackoverflow.data.network.response
 import com.google.gson.annotations.SerializedName
 import cuongduong.developer.android.stackoverflow.data.db.entity.ReputationItem
 
-data class UserDetailReputationResponse(
+data class UserReputationResponse(
     val reputationItems: List<ReputationItem>,
     @SerializedName("has_more")
     val hasMore: Boolean,

@@ -8,15 +8,14 @@ import android.view.View
 import android.view.ViewGroup
 
 import cuongduong.developer.android.stackoverflow.R
-import kotlinx.android.synthetic.main.user_detail_reputation_fragment.*
 
-class UserDetailReputationFragment : Fragment() {
+class UserReputationFragment : Fragment() {
 
     companion object {
-        fun newInstance() = UserDetailReputationFragment()
+        fun newInstance() = UserReputationFragment()
     }
 
-    private lateinit var viewModel: UserDetailReputationViewModel
+    private lateinit var viewModel: UserReputationViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,9 +26,9 @@ class UserDetailReputationFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(UserDetailReputationViewModel::class.java)
+        viewModel = ViewModelProviders.of(this).get(UserReputationViewModel::class.java)
 
-        val safeArgs = arguments?.let { UserDetailReputationFragmentArgs.fromBundle(it) }
+        val safeArgs = arguments?.let { UserReputationFragmentArgs.fromBundle(it) }
         val userId = safeArgs?.userId
     }
 
