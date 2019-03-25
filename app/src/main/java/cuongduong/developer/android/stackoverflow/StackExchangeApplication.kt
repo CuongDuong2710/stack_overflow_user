@@ -14,10 +14,7 @@ import cuongduong.developer.android.stackoverflow.ui.home.UserListViewModelFacto
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.androidXModule
-import org.kodein.di.generic.bind
-import org.kodein.di.generic.instance
-import org.kodein.di.generic.provider
-import org.kodein.di.generic.singleton
+import org.kodein.di.generic.*
 
 class StackExchangeApplication : Application(), KodeinAware {
     override val kodein = Kodein.lazy {
@@ -38,7 +35,7 @@ class StackExchangeApplication : Application(), KodeinAware {
             )
         } // itemListDao and StackExchangeNetworkDataSource
         bind() from provider { UserListViewModelFactory(instance()) } // don't need singleton, this bind() call always return a new instance of our factory
-        bind() from provider { UserReputationViewModelFactory(instance()) }
+        bind() from factory { userId: String -> UserReputationViewModelFactory(userId, instance()) }
         // instance in this case is StackExchangeRepository
     }
 
