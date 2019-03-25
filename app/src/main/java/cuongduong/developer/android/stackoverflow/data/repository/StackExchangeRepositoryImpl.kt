@@ -55,22 +55,22 @@ class StackExchangeRepositoryImpl(
     // save newest user detail reputation list data into local database
     private fun persistFetchedUserReputationList(fetchedUserReputationList: UserReputationResponse) {
         GlobalScope.launch(Dispatchers.IO) {
-            val userReputationList = fetchedUserReputationList.reputationItems
+            val userReputationList = fetchedUserReputationList.items
             userReputationListDao.insert(userReputationList)
         }
     }
 
     // get user detail reputation list from local database
-    override suspend fun getUserReputationList(): LiveData<List<ReputationItem>> {
+    override suspend fun getUserReputationList(userId: String): LiveData<List<ReputationItem>> {
         return withContext(Dispatchers.IO) {
-            initUserReputationList()
-            return@withContext userReputationListDao.getUserReputation()
+            initUserReputationList(userId)
+            return@withContext userReputationListDao.getUserReputation(userId)
         }
     }
 
     // fetch user detail reputation list from api
-    private suspend fun initUserReputationList() {
-        stackExchangeNetworkDataSource.fetchUserReputation(1, 30)
+    private suspend fun initUserReputationList(userId: String) {
+        stackExchangeNetworkDataSource.fetchUserReputation(userId, 1, 30)
     }
 
 }

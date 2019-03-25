@@ -6,5 +6,5 @@ import cuongduong.developer.android.stackoverflow.data.db.entity.ReputationItem
 
 interface StackExchangeRepository {
     suspend fun getUserList(): LiveData<List<Item>>
-    suspend fun getUserReputationList(): LiveData<List<ReputationItem>>
+    suspend fun getUserReputationList(userId: String): LiveData<List<ReputationItem>>
 }

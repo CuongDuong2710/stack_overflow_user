@@ -14,6 +14,7 @@ interface StackExchangeNetworkDataSource {
     )
 
     suspend fun fetchUserReputation(
+        userId: String,
         page: Int,
         pageSize: Int
     )

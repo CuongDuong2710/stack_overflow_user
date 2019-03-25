@@ -12,6 +12,6 @@ interface UserReputationListDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(reputationList: List<ReputationItem>)
 
-    @Query("select * from reputation")
-    fun getUserReputation(): LiveData<List<ReputationItem>>
+    @Query("select * from reputation where userId = :userId")
+    fun getUserReputation(userId: String): LiveData<List<ReputationItem>>
 }

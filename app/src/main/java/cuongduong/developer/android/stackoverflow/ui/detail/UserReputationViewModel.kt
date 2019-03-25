@@ -5,9 +5,10 @@ import cuongduong.developer.android.stackoverflow.data.repository.StackExchangeR
 import cuongduong.developer.android.stackoverflow.internal.lazyDeferred
 
 class UserReputationViewModel(
+    private val userId: String,
     private val stackExchangeRepository: StackExchangeRepository
 ) : ViewModel() {
     val userReputationList by lazyDeferred {
-        stackExchangeRepository.getUserReputationList()
+        stackExchangeRepository.getUserReputationList(userId)
     }
 }

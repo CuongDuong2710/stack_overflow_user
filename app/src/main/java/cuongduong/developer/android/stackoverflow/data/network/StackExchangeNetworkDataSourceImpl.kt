@@ -31,12 +31,12 @@ class StackExchangeNetworkDataSourceImpl(
         }
     }
 
-    override suspend fun fetchUserReputation(page: Int, pageSize: Int) {
+    override suspend fun fetchUserReputation(userId: String, page: Int, pageSize: Int) {
         try {
-            val fetUserDetailReputationList = stackExchangeApiServices
-                .getUserReputation(page, pageSize)
+            val fetchUserReputationList = stackExchangeApiServices
+                .getUserReputation(userId, page, pageSize)
                 .await()
-            _downloadUserReputationList.postValue(fetUserDetailReputationList)
+            _downloadUserReputationList.postValue(fetchUserReputationList)
         } catch (e: NoConnectivityException) {
             Log.e("Connectivity", "No internet connection.", e)
         }
