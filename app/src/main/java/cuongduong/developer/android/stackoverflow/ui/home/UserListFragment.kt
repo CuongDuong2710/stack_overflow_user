@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.ViewHolder
@@ -75,8 +76,15 @@ class UserListFragment : ScopedFragment(), KodeinAware {
         }
 
         groupAdapter.setOnItemClickListener { item, view ->
-            Toast.makeText(this@UserListFragment.context, "Clicked", Toast.LENGTH_SHORT).show()
+            (item as? UserListItem)?.let {
+                showReputationDetail(it.itemEntity.userId, view)
+            }
+
         }
     }
 
+    private fun showReputationDetail(userId: Int, view: View) {
+        val detailReputation = UserListFragmentDirections.actionDetail(userId)
+        Navigation.findNavController(view).navigate(detailReputation)
+    }
 }

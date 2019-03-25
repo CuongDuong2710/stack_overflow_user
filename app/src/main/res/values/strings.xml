@@ -2,4 +2,5 @@
     <string name="app_name">StackOverFlow</string>
     <string name="stack_over_flow_title">StackOverFlow User List</string>
     <string name="bookmark_title">Bookmark</string>
+    <string name="user_detail_reputation">User Details Reputation</string>
 </resources>
