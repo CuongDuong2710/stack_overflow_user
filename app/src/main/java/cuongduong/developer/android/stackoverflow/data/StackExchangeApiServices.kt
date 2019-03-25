@@ -7,6 +7,7 @@ import cuongduong.developer.android.stackoverflow.data.network.response.UserList
 import kotlinx.coroutines.Deferred
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
@@ -31,13 +32,15 @@ interface StackExchangeApiServices {
     ): Deferred<UserListResponse>
 
     // https://api.stackexchange.com/2.2/users/{userid}/reputation-history?page=1&pagesize=30&site=stackoverflow
-    @GET("users/{userid}/reputation-history?site=stackoverflow")
+    @GET("users/{ids}/reputation-history?site=stackoverflow")
     fun getUserReputation(
+        @Path("ids") userId: String,
         @Query("page") page: Int,
         @Query("pagesize") pageSize: Int
     ): Deferred<UserReputationResponse>
 
     companion object {
+        private val logging: HttpLoggingInterceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
         operator fun invoke(
             connectivityInterceptor: ConnectivityInterceptor
         ): StackExchangeApiServices {
@@ -54,9 +57,11 @@ interface StackExchangeApiServices {
 
                 return@Interceptor chain.proceed(request)
             }
+
             val okHttpClient = OkHttpClient.Builder()
                 .addInterceptor(requestInterceptor)
                 .addInterceptor(connectivityInterceptor)
+                .addInterceptor(logging)
                 .build()
 
             return Retrofit.Builder()
