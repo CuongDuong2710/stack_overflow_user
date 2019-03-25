@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 import cuongduong.developer.android.stackoverflow.data.db.entity.ReputationItem
 
 data class UserReputationResponse(
-    val reputationItems: List<ReputationItem>,
+    val items: List<ReputationItem>,
     @SerializedName("has_more")
     val hasMore: Boolean,
     @SerializedName("quota_max")
