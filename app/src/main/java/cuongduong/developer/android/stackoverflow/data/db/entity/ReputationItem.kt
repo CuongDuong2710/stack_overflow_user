@@ -1,12 +1,10 @@
 package cuongduong.developer.android.stackoverflow.data.db.entity
 
 import androidx.room.Entity
-import androidx.room.Index
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = "reputation")
-//, indices = [Index(value = ["id"], unique = true)])
 data class ReputationItem(
     @SerializedName("reputation_history_type")
     val reputationHistoryType: String,
