@@ -25,10 +25,11 @@ class StackExchangeApplication : Application(), KodeinAware {
         // create singleton instance of database, DAO class, connectivity, api services class... for whole app
         bind() from singleton { StackOverFlowDatabase(instance()) } // instance in this case is application context - get from androidXModule
         bind() from singleton { instance<StackOverFlowDatabase>().itemListDao() } // get itemListDao from above instance of StackOverFlowDatabase
+        bind() from singleton { instance<StackOverFlowDatabase>().userReputationListDao() }
         bind<ConnectivityInterceptor>() with singleton { ConnectivityInterceptorImp(instance()) } // bind singleton interface ConnectivityInterceptor into StackExchangeApplication
         bind() from singleton { StackExchangeApiServices(instance()) } // instance in this case is above instance of ConnectivityInterceptor
         bind<StackExchangeNetworkDataSource>() with singleton { StackExchangeNetworkDataSourceImpl(instance()) } // instance in this case is StackExchangeApiServices
-        bind<StackExchangeRepository>() with singleton { StackExchangeRepositoryImpl(instance(), instance()) } // itemListDao and StackExchangeNetworkDataSource
+        bind<StackExchangeRepository>() with singleton { StackExchangeRepositoryImpl(instance(), instance(), instance()) } // itemListDao and StackExchangeNetworkDataSource
         bind() from provider { UserListViewModelFactory(instance()) } // don't need singleton, this bind() call always return a new instance of our factory
         // instance in this case is StackExchangeRepository
     }
