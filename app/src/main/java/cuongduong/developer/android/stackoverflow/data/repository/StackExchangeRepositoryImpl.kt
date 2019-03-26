@@ -1,8 +1,10 @@
 package cuongduong.developer.android.stackoverflow.data.repository
 
 import androidx.lifecycle.LiveData
+import cuongduong.developer.android.stackoverflow.data.db.dao.BookmarkListDao
 import cuongduong.developer.android.stackoverflow.data.db.dao.ItemListDao
 import cuongduong.developer.android.stackoverflow.data.db.dao.UserReputationListDao
+import cuongduong.developer.android.stackoverflow.data.db.entity.BookmarkItem
 import cuongduong.developer.android.stackoverflow.data.db.entity.Item
 import cuongduong.developer.android.stackoverflow.data.db.entity.ReputationItem
 import cuongduong.developer.android.stackoverflow.data.network.StackExchangeNetworkDataSource
@@ -16,6 +18,7 @@ import kotlinx.coroutines.withContext
 class StackExchangeRepositoryImpl(
     private val itemListDao: ItemListDao,
     private val userReputationListDao: UserReputationListDao,
+    private val bookmarkListDao: BookmarkListDao,
     private val stackExchangeNetworkDataSource: StackExchangeNetworkDataSource
 ) : StackExchangeRepository {
 
@@ -71,6 +74,17 @@ class StackExchangeRepositoryImpl(
     // fetch user detail reputation list from api
     private suspend fun initUserReputationList(userId: String) {
         stackExchangeNetworkDataSource.fetchUserReputation(userId, 1, 30)
+    }
+
+    fun insertBookMarks(bookmarkList: List<BookmarkItem>) {
+        bookmarkListDao.insert(bookmarkList)
+    }
+
+    // get bookmark list from local database
+    override suspend fun getBookmarksList(): LiveData<List<BookmarkItem>> {
+        return withContext(Dispatchers.IO) {
+            return@withContext bookmarkListDao.getBookMarkList()
+        }
     }
 
 }

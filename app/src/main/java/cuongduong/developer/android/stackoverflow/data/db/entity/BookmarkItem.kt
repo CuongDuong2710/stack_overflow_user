@@ -5,8 +5,8 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
-@Entity(tableName = "item")
-data class Item(
+@Entity(tableName = "bookmark")
+data class BookmarkItem(
     @SerializedName("last_access_date")
     val lastAccessDate: Long,
     val reputation: Int,
