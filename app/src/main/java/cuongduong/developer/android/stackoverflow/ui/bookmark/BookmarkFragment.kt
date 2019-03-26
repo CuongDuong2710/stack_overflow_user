@@ -42,7 +42,7 @@ class BookmarkFragment : ScopedFragment(), KodeinAware {
         bindUI()
     }
 
-    private fun bindUI() = launch(Dispatchers.IO) {
+    private fun bindUI() = launch(Dispatchers.Main) {
         viewModel.insertBookmarkItem.await()
 
         val bookmarkList = viewModel.bookmarkList.await()
@@ -56,7 +56,7 @@ class BookmarkFragment : ScopedFragment(), KodeinAware {
 
     private fun List<BookmarkItem>.toBookmarkListItem(): List<BookmarkListItem> {
         return this.map {
-            BookmarkListItem(it)
+            BookmarkListItem(it, {item, favorite ->  })
         }
     }
 
@@ -65,7 +65,7 @@ class BookmarkFragment : ScopedFragment(), KodeinAware {
             addAll(items)
         }
 
-        recyclerView.apply {
+        recyclerView_bookmark.apply {
             layoutManager = LinearLayoutManager(this@BookmarkFragment.context)
             adapter = groupAdapter
         }

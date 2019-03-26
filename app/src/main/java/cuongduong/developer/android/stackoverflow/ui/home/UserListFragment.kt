@@ -2,6 +2,7 @@ package cuongduong.developer.android.stackoverflow.ui.home
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,6 +28,8 @@ class UserListFragment : ScopedFragment(), KodeinAware {
     private val viewModelFactory: UserListViewModelFactory by instance()
 
     private lateinit var viewModel: UserListViewModel
+
+    private val handler = Handler()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -57,7 +60,12 @@ class UserListFragment : ScopedFragment(), KodeinAware {
     // convert Item to UserListItem -> render each item on user list screen
     private fun List<Item>.toUserListItem(): List<UserListItem> {
         return this.map {
-            UserListItem(this@UserListFragment.context, it)
+            UserListItem(this@UserListFragment.context, it, {item, favorite ->
+                handler.postDelayed({
+                    item.setFavorite(favorite)
+                    item.notifyChanged(FAVORITE)
+                }, 1000)
+            })
         }
     }
 

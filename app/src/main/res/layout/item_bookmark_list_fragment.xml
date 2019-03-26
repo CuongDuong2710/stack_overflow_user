@@ -115,10 +115,10 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@+id/textView_bookmark_last_access_date"/>
-        <ImageView
+        <cuongduong.developer.android.stackoverflow.ui.custom_view.CheckableImageView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" app:srcCompat="@drawable/ic_bookmark"
-                android:id="@+id/favorite" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+                android:layout_height="wrap_content" app:srcCompat="@drawable/favorite_state_list"
+                android:id="@+id/favorite_bookmark_page" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent"/>
 
 
