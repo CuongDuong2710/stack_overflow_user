@@ -18,7 +18,7 @@ data class Item(
     @SerializedName("last_modified_date")
     val lastModifiedDate: Int,
     @SerializedName("last_access_date")
-    val lastAccessDate: Int,
+    val lastAccessDate: Long,
     @SerializedName("reputation_change_year")
     val reputationChangeYear: Int,
     @SerializedName("reputation_change_quarter")

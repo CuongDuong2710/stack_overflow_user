@@ -15,7 +15,7 @@
               android:label="@string/bookmark_title" tools:layout="@layout/bookmark_fragment"/>
     <fragment android:id="@+id/userReputationFragment"
               android:name="cuongduong.developer.android.stackoverflow.ui.detail.UserReputationFragment"
-              android:label="@string/user_detail_reputation" tools:layout="@layout/user_detail_reputation_fragment">
+              android:label="@string/user_detail_reputation" tools:layout="@layout/item_user_reputation_list_fragment">
         <argument
             android:name="userId"
             app:argType="integer"

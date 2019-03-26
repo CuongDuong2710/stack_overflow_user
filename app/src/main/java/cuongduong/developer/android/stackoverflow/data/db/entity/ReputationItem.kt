@@ -13,7 +13,7 @@ data class ReputationItem(
     @SerializedName("post_id")
     val postId: Int,
     @SerializedName("creation_date")
-    val creationDate: Int,
+    val creationDate: Long,
     @SerializedName("user_id")
     val userId: Int
 ){
