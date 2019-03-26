@@ -5,9 +5,8 @@ import com.xwray.groupie.kotlinandroidextensions.ViewHolder
 import cuongduong.developer.android.stackoverflow.R
 import cuongduong.developer.android.stackoverflow.data.db.entity.ReputationItem
 import cuongduong.developer.android.stackoverflow.internal.ReputationType
+import cuongduong.developer.android.stackoverflow.ui.provider.FormatDateProvider
 import kotlinx.android.synthetic.main.item_user_reputation_list_fragment.*
-import java.text.SimpleDateFormat
-import java.util.*
 
 class UserReputationItem(
     val reputationItem: ReputationItem
@@ -36,9 +35,7 @@ class UserReputationItem(
     }
 
     private fun ViewHolder.updateDate() {
-        val date = Date(reputationItem.creationDate * 1000L)
-        val df2 = SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.US)
-        val dateText = df2.format(date)
-        textView_creation_date.text = dateText
+        textView_creation_date.text = FormatDateProvider().formatLongToDateString(reputationItem.creationDate)
     }
 }
+

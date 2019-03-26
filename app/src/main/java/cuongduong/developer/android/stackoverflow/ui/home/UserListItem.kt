@@ -4,9 +4,8 @@ import com.xwray.groupie.kotlinandroidextensions.Item
 import com.xwray.groupie.kotlinandroidextensions.ViewHolder
 import cuongduong.developer.android.stackoverflow.R
 import cuongduong.developer.android.stackoverflow.internal.glide.GlideApp
+import cuongduong.developer.android.stackoverflow.ui.provider.FormatDateProvider
 import kotlinx.android.synthetic.main.item_user_list_fragment.*
-import java.text.SimpleDateFormat
-import java.util.*
 
 
 class UserListItem(
@@ -33,9 +32,6 @@ class UserListItem(
     }
 
     private fun ViewHolder.updateDate() {
-        val date = Date(itemEntity.lastAccessDate * 1000L)
-        val df2 = SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.US)
-        val dateText = df2.format(date)
-        textView_date_value.text = dateText
+        textView_date_value.text = FormatDateProvider().formatLongToDateString(itemEntity.lastAccessDate)
     }
 }
