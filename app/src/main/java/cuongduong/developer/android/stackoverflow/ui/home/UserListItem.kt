@@ -1,5 +1,7 @@
 package cuongduong.developer.android.stackoverflow.ui.home
 
+import android.content.Context
+import android.widget.Toast
 import com.xwray.groupie.kotlinandroidextensions.Item
 import com.xwray.groupie.kotlinandroidextensions.ViewHolder
 import cuongduong.developer.android.stackoverflow.R
@@ -9,6 +11,7 @@ import kotlinx.android.synthetic.main.item_user_list_fragment.*
 
 
 class UserListItem(
+    val context: Context?,
     val itemEntity: cuongduong.developer.android.stackoverflow.data.db.entity.Item
 ) : Item() {
     override fun bind(viewHolder: ViewHolder, position: Int) {
@@ -20,6 +23,9 @@ class UserListItem(
             textView_last_access_date.text = "Access date:"
             updateAvatar()
             updateDate()
+            favorite.setOnClickListener {
+                Toast.makeText(context, "click", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 

@@ -54,9 +54,10 @@ class UserListFragment : ScopedFragment(), KodeinAware {
         })
     }
 
+    // convert Item to UserListItem -> render each item on user list screen
     private fun List<Item>.toUserListItem(): List<UserListItem> {
         return this.map {
-            UserListItem(it)
+            UserListItem(this@UserListFragment.context, it)
         }
     }
 
@@ -74,7 +75,6 @@ class UserListFragment : ScopedFragment(), KodeinAware {
             (item as? UserListItem)?.let {
                 showReputationDetail(it.itemEntity.userId, view)
             }
-
         }
     }
 
