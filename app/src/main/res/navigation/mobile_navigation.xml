@@ -12,7 +12,7 @@
     </fragment>
     <fragment android:id="@+id/bookmarkFragment"
               android:name="cuongduong.developer.android.stackoverflow.ui.bookmark.BookmarkFragment"
-              android:label="@string/bookmark_title" tools:layout="@layout/bookmark_fragment"/>
+              android:label="@string/bookmark_title" tools:layout="@layout/bookmark_list_fragment"/>
     <fragment android:id="@+id/userReputationFragment"
               android:name="cuongduong.developer.android.stackoverflow.ui.detail.UserReputationFragment"
               android:label="@string/user_detail_reputation" tools:layout="@layout/item_user_reputation_list_fragment">
