@@ -9,4 +9,5 @@ interface StackExchangeRepository {
     suspend fun getUserList(): LiveData<List<Item>>
     suspend fun getUserReputationList(userId: String): LiveData<List<ReputationItem>>
     suspend fun getBookmarksList(): LiveData<List<BookmarkItem>>
+    suspend fun insertBookmarksList(bookmark: BookmarkItem)
 }

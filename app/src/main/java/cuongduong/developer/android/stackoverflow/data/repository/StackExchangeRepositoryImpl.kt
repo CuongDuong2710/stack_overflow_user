@@ -76,8 +76,8 @@ class StackExchangeRepositoryImpl(
         stackExchangeNetworkDataSource.fetchUserReputation(userId, 1, 30)
     }
 
-    fun insertBookMarks(bookmarkList: List<BookmarkItem>) {
-        bookmarkListDao.insert(bookmarkList)
+    override suspend fun insertBookmarksList(bookmark: BookmarkItem) {
+        bookmarkListDao.insert(bookmark)
     }
 
     // get bookmark list from local database

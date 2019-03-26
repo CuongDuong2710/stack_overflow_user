@@ -10,7 +10,7 @@ import cuongduong.developer.android.stackoverflow.data.db.entity.BookmarkItem
 @Dao
 interface BookmarkListDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(bookmarkList: List<BookmarkItem>)
+    fun insert(bookmark: BookmarkItem)
 
     @Query("select * from bookmark")
     fun getBookMarkList(): LiveData<List<BookmarkItem>>
