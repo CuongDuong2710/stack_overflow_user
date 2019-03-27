@@ -13,6 +13,7 @@ import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.ViewHolder
 
 import cuongduong.developer.android.stackoverflow.R
+import cuongduong.developer.android.stackoverflow.data.db.entity.BookmarkItem
 import cuongduong.developer.android.stackoverflow.data.db.entity.Item
 import cuongduong.developer.android.stackoverflow.ui.base.ScopedFragment
 import kotlinx.android.synthetic.main.user_list_fragment.*
@@ -60,13 +61,20 @@ class UserListFragment : ScopedFragment(), KodeinAware {
     // convert Item to UserListItem -> render each item on user list screen
     private fun List<Item>.toUserListItem(): List<UserListItem> {
         return this.map {
-            UserListItem(this@UserListFragment.context, it, {item, favorite ->
-                handler.postDelayed({
-                    item.setFavorite(favorite)
-                    item.notifyChanged(FAVORITE)
-                }, 1000)
-            })
+            UserListItem(this@UserListFragment.context, it) { item, favorite ->
+                launch(Dispatchers.IO) {
+                    viewModel.insert(convertItemToBookmarkItem(item.itemEntity))
+                    handler.postDelayed({
+                        item.setFavorite(favorite)
+                        item.notifyChanged(FAVORITE)
+                    }, 1000)
+                }
+            }
         }
+    }
+
+    private fun convertItemToBookmarkItem(item: Item): BookmarkItem {
+        return BookmarkItem(item.lastAccessDate, item.reputation, item.userId, item.location, item.profileImage, item.displayName)
     }
 
     private fun initRecycleView(items: List<UserListItem>) {

@@ -12,6 +12,6 @@ class BookmarkViewModel(
         stackExchangeRepository.getBookmarksList()
     }
     val insertBookmarkItem by lazyDeferred {
-        stackExchangeRepository.insertBookmarksList(BookmarkItem(1553571689, 600814, 5445, "Guatemala", "https://www.gravatar.com/avatar/932fb89b9d4049cec5cba357bf0ae388?s=128&d=identicon&r=PG", "CMS"))
+        stackExchangeRepository.insertBookmark(BookmarkItem(1553571689, 600814, 5445, "Guatemala", "https://www.gravatar.com/avatar/932fb89b9d4049cec5cba357bf0ae388?s=128&d=identicon&r=PG", "CMS"))
     }
 }

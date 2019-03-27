@@ -76,7 +76,7 @@ class StackExchangeRepositoryImpl(
         stackExchangeNetworkDataSource.fetchUserReputation(userId, 1, 30)
     }
 
-    override suspend fun insertBookmarksList(bookmark: BookmarkItem) {
+    override suspend fun insertBookmark(bookmark: BookmarkItem) {
         bookmarkListDao.insert(bookmark)
     }
 
