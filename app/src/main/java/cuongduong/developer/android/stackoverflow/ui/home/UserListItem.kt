@@ -18,7 +18,6 @@ class UserListItem(
 ) : Item() {
 
     private var checked = false
-    private var inProgress = false
 
     override fun bind(viewHolder: ViewHolder, position: Int) {
         viewHolder.apply {
@@ -47,11 +46,7 @@ class UserListItem(
     }
 
     private fun bindBookmark(holder: ViewHolder) {
-        if (inProgress)
-            animateProgress(holder)
-        else
-            holder.favorite_user_page.setImageResource(R.drawable.favorite_state_list)
-
+        holder.favorite_user_page.setImageResource(R.drawable.favorite_state_list)
         holder.favorite_user_page.isChecked = checked
     }
 
@@ -64,22 +59,19 @@ class UserListItem(
 
     private fun ViewHolder.onClickBookmark(holder: ViewHolder) {
         favorite_user_page.setOnClickListener {
-            inProgress = true
             animateProgress(holder)
             onFavoriteListener(this@UserListItem, !checked)
         }
     }
 
     fun setFavorite(favorite: Boolean) {
-        inProgress = false
         checked = favorite
     }
 
     override fun bind(holder: ViewHolder, position: Int, payloads: MutableList<Any>) {
         if (payloads.contains(FAVORITE)) {
             bindBookmark(holder)
-        }
-        else
+        } else
             bind(holder, position)
     }
 }
