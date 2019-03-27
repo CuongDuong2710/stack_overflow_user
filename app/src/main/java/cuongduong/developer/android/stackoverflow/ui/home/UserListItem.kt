@@ -74,4 +74,11 @@ class UserListItem(
         } else
             bind(holder, position)
     }
+
+    private fun checkItemIsBookMark(holder: ViewHolder) {
+        if (itemEntity.isBookmark)
+            holder.favorite_user_page.setImageResource(R.drawable.ic_bookmark)
+        else
+            holder.favorite_user_page.setImageResource(R.drawable.ic_bookmark_border)
+    }
 }

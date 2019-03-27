@@ -87,4 +87,8 @@ class StackExchangeRepositoryImpl(
         }
     }
 
+    override suspend fun updateBookmarkItem(isBookmark: Boolean, userId: Int) {
+        itemListDao.updateBookmarkItem(isBookmark, userId)
+    }
+
 }

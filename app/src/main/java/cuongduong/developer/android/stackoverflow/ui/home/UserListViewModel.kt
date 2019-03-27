@@ -14,4 +14,8 @@ class UserListViewModel(
     suspend fun insert(bookmarkItem: BookmarkItem) {
         stackExchangeRepository.insertBookmark(bookmarkItem)
     }
+
+    suspend fun updateBookmarkItem(isBookmark: Boolean, userId: Int) {
+        stackExchangeRepository.updateBookmarkItem(isBookmark, userId)
+    }
 }

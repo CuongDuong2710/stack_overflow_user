@@ -14,4 +14,7 @@ interface ItemListDao {
 
     @Query("select * from item")
     fun getUserList(): LiveData<List<Item>>
+
+    @Query("update item set isBookmark =:isBookmark where userId =:userId")
+    fun updateBookmarkItem(isBookmark: Boolean, userId: Int)
 }

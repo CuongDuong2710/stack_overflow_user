@@ -63,7 +63,10 @@ class UserListFragment : ScopedFragment(), KodeinAware {
         return this.map {
             UserListItem(this@UserListFragment.context, it) { item, favorite ->
                 launch(Dispatchers.IO) {
+                    // insert data into bookmark table
                     viewModel.insert(convertItemToBookmarkItem(item.itemEntity))
+                    // update item in item table
+//                    viewModel.updateBookmarkItem(favorite, item.itemEntity.userId)
                     handler.postDelayed({
                         item.setFavorite(favorite)
                         item.notifyChanged(FAVORITE)

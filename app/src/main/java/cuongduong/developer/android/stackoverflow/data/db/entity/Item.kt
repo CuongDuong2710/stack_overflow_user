@@ -18,5 +18,6 @@ data class Item(
     @SerializedName("profile_image")
     val profileImage: String,
     @SerializedName("display_name")
-    val displayName: String
+    val displayName: String,
+    val isBookmark: Boolean = false
 )
